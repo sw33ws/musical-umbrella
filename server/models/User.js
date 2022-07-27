@@ -12,11 +12,10 @@ const userSchema = new Schema({
     },
     email: {
         type: String,
+        trim: true,
         required: true,
         unique: true,
-        validate: {
-            isEmail: true,
-        },
+        match: [/.+@.+\..+/],
     },
     password: {
         type: String,
