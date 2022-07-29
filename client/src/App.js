@@ -1,4 +1,5 @@
-import logo from './logo.svg';
+import Contact from "client/src/component/Contact/Contact.js";
+import Footer from "client/src/component/Footer/Footer.js";
 import './App.css';
 
 function App() {
@@ -15,8 +16,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
-        </a>
+Git Commit: A Meeting of Charity.</a>
       </header>
     </div>
   );
