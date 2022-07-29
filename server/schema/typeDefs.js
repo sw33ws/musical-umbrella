@@ -23,6 +23,12 @@ type Query {
     user: [User]
     post: [Post]
     comment: [Comment]
+}
+type Mutation {
+    addUser(username: String!, email: String!, password: String!): User
+    addPost(title: String!, post: String!): Post
+    addComment(comment: String!): Comment
 }`;
+
 
 module.exports = typeDefs;
