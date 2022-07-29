@@ -19,13 +19,19 @@ type Comment {
     _id: ID
     comment: String
 }
+type Auth {
+    token: ID!
+    user: User
+  }
 type Query {
-    user: [User]
+    users: [User]
+    user(username: String!): User
     post: [Post]
     comment: [Comment]
 }
 type Mutation {
-    addUser(username: String!, email: String!, password: String!): User
+    addUser(username: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
     addPost(title: String!, post: String!): Post
     addComment(comment: String!): Comment
 }`;
