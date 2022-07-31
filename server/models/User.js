@@ -15,6 +15,7 @@ const userSchema = new Schema({
         trim: true,
         required: true,
         unique: true,
+        // This makes sure the string typed in above matchs the email regex
         match: [/.+@.+\..+/],
     },
     password: {
