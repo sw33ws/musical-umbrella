@@ -1,5 +1,5 @@
-import Contact from "client/src/component/Contact/Contact.js";
-import Footer from "client/src/component/Footer/Footer.js";
+// import Contact from "client/src/component/Contact/Contact.js";
+// import Footer from "client/src/component/Footer/Footer.js";
 import './App.css';
 
 function App() {
