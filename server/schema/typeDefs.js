@@ -6,14 +6,13 @@ type User {
     username: String
     email: String
     password: String
-    posts: [Post]
-    comments: [Comment]
+    posts: [Post]!
 }
 type Post {
     _id: ID
     title: String
     post: String
-    comments: [Comment]
+    comments: [Comment]!
 }
 type Comment {
     _id: ID
@@ -24,16 +23,20 @@ type Auth {
     user: User
   }
 type Query {
-    users: [User]
+    users: [User]!
     user(username: String!): User
-    post: [Post]
-    comment: [Comment]
+    posts: [Post]!
+    post(postId: ID!): Post
+    comments: [Comment]!
+    comment(commentId: ID!): Comment
 }
 type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addPost(title: String!, post: String!): Post
     addComment(comment: String!): Comment
+    removePost(postId: ID!, title: String!, post: String!): Post
+    removeComment(commentId: ID!, comment: String!): Comment
 }`;
 
 
