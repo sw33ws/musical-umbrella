@@ -9,17 +9,16 @@ const resolvers = {
     Query: {
         users: async () => {
             return await User.find({})
-            // .populate('posts')
-            // .populate('comments');
+            // .populate('posts');
         },
         user: async () => {
             return await User.findOne({ username})
         },
-        post: async () => {
+        posts: async () => {
             return await Post.find({})
             // .populate('comments');
         },
-        comment: async () => {
+        comments: async () => {
             return await Comment.find({})
         }
     },
@@ -46,6 +45,12 @@ const resolvers = {
         },
         addComment: async (parent, { comment }) => {
             return await Comment.create({ comment });
+        },
+        removePost: async (parent, { postId }) => {
+            return Post.findOneAndDelete({ _id: postId });
+        },
+        removeComment: async (parent, { commentId }) => {
+            return Comment.findOneAndDelete({ _id: commentId });
         }
     }
 };
