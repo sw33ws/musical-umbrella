@@ -1,35 +1,26 @@
-import Contact from "client/src/component/Contact/Contact.js";
-import Footer from "client/src/component/Footer/Footer.js";
-import "./App.css";
-import { useState } from "react";
-import { CssBaseline } from "@mui/material";
-import { Route, Routes, Navigate, useLocation } from "react-router-dom";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import React, { Component } from "react";
+
+// function App() {
+//   return <div className="App">Git Commit</div>;
+// }
+// import "./App.css";
+import styled from "styled-components";
+import { AccountBox } from "./components/accountBox";
+
+const AppContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 function App() {
-  const [auth, setAuth] = useState(false);
-  const location = useLocation();
-
   return (
-    <>
-      <CssBaseline />
-      <Routes>
-        <Route path="/login" element={<Login setAuth={setAuth} />} />
-        <Route path="/signup" element={<Signup setAuth={setAuth} />} />
-        <Route
-          path="/"
-          element={
-            auth ? (
-              <Home setAuth={setAuth} />
-            ) : (
-              <Navigate to="/login" state={{ from: location }} replace />
-            )
-          }
-        />
-      </Routes>
-    </>
+    <AppContainer>
+      <AccountBox />
+    </AppContainer>
   );
 }
 
