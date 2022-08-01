@@ -13,13 +13,12 @@ type Post {
     poster: String
     title: String
     post: String
-    user: User
     comments: [Comment]!
 }
 type Comment {
     _id: ID
     comment: String
-    post: Post
+    commentPost: String
 }
 type Auth {
     token: ID!
@@ -32,7 +31,7 @@ type Query {
     posts(username: String): [Post]!
     post(postId: ID!): Post
     
-    comments: [Comment]!
+    comments(postId: ID): [Comment]!
     comment(commentId: ID!): Comment
 }
 type Mutation {
@@ -40,7 +39,7 @@ type Mutation {
     login(email: String!, password: String!): Auth
 
     addPost(poster: String!, title: String!, post: String!): Post
-    addComment(comment: String!): Comment
+    addComment(commentPost: String!, comment: String!): Comment
 
     removePost(postId: ID!, title: String!, post: String!): Post
     removeComment(commentId: ID!, comment: String!): Comment
