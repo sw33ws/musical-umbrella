@@ -11,12 +11,14 @@ const resolvers = {
             return await User.find({})
             .populate('posts');
         },
-        user: async () => {
+        user: async (parent, { username }) => {
             return await User.findOne({ username})
             .populate('posts');
         },
-        posts: async () => {
-            return await Post.find({})
+        posts: async (parents, { username }) => {
+            // return await Post.find({})
+            const params = username ? { username } : {};
+            return Post.find(params)
             .populate('comments');
         },
         comments: async () => {
@@ -47,8 +49,14 @@ const resolvers = {
             return { token, user};
         },
         // creating a new post and comment
-        addPost: async (parent, { title, post }) => {
-            return await Post.create({ title, post });
+        addPost: async (parent, { poster, title, post }) => {
+            const postE = await Post.create({ poster, title, post });
+            // finding a username matching title, and adding the newly made post to it
+            await User.findOneAndUpdate(
+                { username: poster },
+                { $addToSet: { posts: postE._id } }
+              );
+              return postE;
         },
         addComment: async (parent, { comment }) => {
             return await Comment.create({ comment });
@@ -64,19 +72,19 @@ const resolvers = {
         updatePost: async (parent, { id, title, post }) => {
             // finding the matching post
             return await Post.findOneAndUpdate(
-                { _id: id},
+                { _id: id },
                 { title, post },
                 // This returns the new object, indead of the original
-                { new: true}
+                { new: true }
             );
         },
         updateComment: async (parent, { id, comment }) => {
             // finding the matching comment
             return await Comment.findOneAndUpdate(
-                { _id: id},
+                { _id: id },
                 { comment },
                 // This returns the new object, indead of the original
-                { new: true}
+                { new: true }
             );
         }
     }
