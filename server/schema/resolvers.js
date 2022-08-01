@@ -21,8 +21,9 @@ const resolvers = {
             return Post.find(params)
             .populate('comments');
         },
-        comments: async () => {
-            return await Comment.find({})
+        comments: async (parents, { poster }) => {
+            const params = poster ? { poster } : {};
+            return Comment.find(params);
         }
     },
     Mutation: {
@@ -51,15 +52,21 @@ const resolvers = {
         // creating a new post and comment
         addPost: async (parent, { poster, title, post }) => {
             const postE = await Post.create({ poster, title, post });
-            // finding a username matching title, and adding the newly made post to it
+            // finding a username matching username, and adding the newly made post to it
             await User.findOneAndUpdate(
                 { username: poster },
                 { $addToSet: { posts: postE._id } }
               );
               return postE;
         },
-        addComment: async (parent, { comment }) => {
-            return await Comment.create({ comment });
+        addComment: async (parent, { commentPost, comment }) => {
+            const commentE = await Comment.create({ commentPost, comment });
+            // finding a post with a matching poster
+            await Post.findOneAndUpdate(
+                { _id: commentPost },
+                { $addToSet: { comments: commentE._id } }
+            );
+            return commentE;
         },
         // removing posts and comments
         removePost: async (parent, { postId }) => {
