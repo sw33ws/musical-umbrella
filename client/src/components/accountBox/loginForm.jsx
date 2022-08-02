@@ -11,7 +11,7 @@ import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 
 export function LoginForm(props) {
-  const { switchToSignup } = useContext(AccountContext);
+  const { switchToSignup } = useContext(AccountContext);cd 
 
   return (
     <BoxContainer>
