@@ -50,8 +50,8 @@ const resolvers = {
             return { token, user};
         },
         // creating a new post and comment
-        addPost: async (parent, { poster, title, post }) => {
-            const postE = await Post.create({ poster, title, post });
+        addPost: async (parent, { poster, title, post, link }) => {
+            const postE = await Post.create({ poster, title, post, link });
             // finding a username matching username, and adding the newly made post to it
             await User.findOneAndUpdate(
                 { username: poster },
@@ -76,11 +76,11 @@ const resolvers = {
             return Comment.findOneAndDelete({ _id: commentId });
         },
         //updating posts and comments
-        updatePost: async (parent, { id, title, post }) => {
+        updatePost: async (parent, { id, title, post, link }) => {
             // finding the matching post
             return await Post.findOneAndUpdate(
                 { _id: id },
-                { title, post },
+                { title, post, link },
                 // This returns the new object, indead of the original
                 { new: true }
             );
