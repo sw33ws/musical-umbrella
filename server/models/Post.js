@@ -12,6 +12,10 @@ const postSchema = new Schema(
             type: String,
             required: true,
         },
+        link: {
+            type: String,
+            required: true,
+        },
         comments: [
             {
                 type: Schema.Types.ObjectId,

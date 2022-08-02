@@ -13,6 +13,7 @@ type Post {
     poster: String
     title: String
     post: String
+    link: String
     comments: [Comment]!
 }
 type Comment {
@@ -38,13 +39,13 @@ type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
 
-    addPost(poster: String!, title: String!, post: String!): Post
+    addPost(poster: String!, title: String!, post: String!, link: String!): Post
     addComment(commentPost: String!, comment: String!): Comment
 
-    removePost(postId: ID!, title: String!, post: String!): Post
+    removePost(postId: ID!, title: String!, post: String!, link: String!): Post
     removeComment(commentId: ID!, comment: String!): Comment
 
-    updatePost(id: ID!, title: String!, post: String!): Post
+    updatePost(id: ID!, title: String!, post: String!, link: String!): Post
     updateComment(id: ID!, comment: String): Comment
 }`;
 
