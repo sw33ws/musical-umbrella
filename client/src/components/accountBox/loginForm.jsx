@@ -28,7 +28,6 @@ async function submit () {
       variables: { ...userinfo },
     });
     Auth.login(data.login.token);
-    console.log(data);
   } catch (error) {
     console.log(error);
   }
