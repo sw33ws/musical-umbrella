@@ -17,7 +17,6 @@ mutation Login($email: String!, $password: String!) {
       token
       user {
         username
-        email
         _id
       }
     }
