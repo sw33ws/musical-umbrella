@@ -10,6 +10,12 @@ import { setContext } from "@apollo/client/link/context";
 import { AccountBox } from "./components/accountBox";
 import styled from "styled-components";
 import Navbar from '../src/components/Navbar';
+import Home from './Pages/Home';
+import Profile from './Pages/Profile';
+import Commits from './Pages/Commits';
+import Menu from '../src/components/Menu';
+import SignIn from './Pages/SignIn';
+
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -51,7 +57,7 @@ function App() {
       <AppContainer>
               <AccountBox />
             </AppContainer>
-      {/* <Router>
+      <Router>
         <Navbar clicked={clicked} isClicked={isClicked} />
         {clicked ? <Menu /> : null}
         <Routes>
@@ -59,12 +65,12 @@ function App() {
           <Route exact path="profile" element={<Profile />} />
           <Route exact path="commits" element={<Commits />}/>
           <Route exact path="sign-in">
-            <AppContainer>
+            {/* <AppContainer>
               <AccountBox />
-            </AppContainer>
+            </AppContainer> */}
           </Route>
         </Routes> 
-      </Router> */}
+      </Router>
     </ApolloProvider>
   );
 }
